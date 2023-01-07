@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
 
+//Using express.json()
+app.use(express.json())
+//Requiring async errors
+require('express-async-errors')
+
 // For testing purposes, GET /
 app.get('/', (req, res) => {
   res.json("Express server running. No content provided at root level. Please use another route.");
@@ -18,6 +23,11 @@ app.post('/test-json', (req, res, next) => {
 app.get('/test-error', async (req, res) => {
   throw new Error("Hello World!")
 });
+
+//Get static files
+app.use("/static",express.static(`assets`))
+
+//Express.json
 
 const port = 5000;
 app.listen(port, () => console.log('Server is listening on port', port));
